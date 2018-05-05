@@ -8,6 +8,14 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+    <script src="main.js"></script>
+    <script src="authentication.js"></script>
+    <script src="portfolio.js"></script>
+    <script src="User.js"></script>
+  
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,7 +34,7 @@
                     <a class="nav-link" href="file:///Users/benkerns09/DigitalCrafts/files/May3/group1/index.html#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Notifications
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -40,16 +48,31 @@
                         Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a id = "menuItemLogin" href="#loginModal" class="dropdown-item" data-toggle="modal">Login</a>
+                        <a href="#" id = "menuItemLogout" class="nav-link">Log out</a>
+                        <div class="dropdown-divider"></div>               
                         <a class="dropdown-item" href="#">Banking</a>
                         <a class="dropdown-item" href="#">Summary</a>
                         <a class="dropdown-item" href="#">Help</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">View History</a>
+                        <div class="dropdown-divider"></div>
+                        <a id="menuItemLoadData" class="dropdown-item" href="#">Load Data</a>
+                        <a id="menuItemSaveData" class="dropdown-item" href="#">Save Data</a>
+
+                        <a id="menuItemAppUserData" class="dropdown-item" href="#">Data - AppUser</a>
+                        <a id="menuItemFirebaseData" class="dropdown-item" href="#">Firestore cloud</a>
+
                     </div>
                 </li>
+                <span id= "userInitial">
+                    A
+                  </span>
+                 
             </ul>
         </div>
     </nav>
+
     <div class="container-fluid">
         <div class="row">
         <br>
@@ -72,7 +95,7 @@
                     <h5>For You</h5>
                     <div class="card-group">
                         <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
+                            <img class="card-img-top" src="bear.jpg" alt="Card image cap">
                             <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -80,7 +103,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
+                            <img class="card-img-top" src="bear.jpg" alt="Card image cap">
                             <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
@@ -88,7 +111,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img class="card-img-top" src="..." alt="Card image cap">
+                            <img class="card-img-top" src="bear.jpg" alt="Card image cap">
                             <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
@@ -105,6 +128,29 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <div class="container">
+                    <select id = "pairs">
+                      <option value="BTC">Bitcoin</option>
+                      <option value="BCH">Bitcoin Cash</option>
+                      <option value="ETH">Ethereum</option>
+                      <option value="XRP">Ripple</option>
+                      <option value="LTC">Litecoin</option>
+                      <option value="ETC">Ethereum Classic</option>
+                      <option value="STR">Stellar</option>
+                      <option value="NXT">NXT</option>
+                      <option value="ZEC">Zcash</option>
+                      <option value="XMR">Monero</option>
+                      <option value="DASH">Dash</option>
+                      <option value="REP">Augur</option>
+                    </select>
+              
+                    <input id="amount" type="text" class="form-control" placeholder="amount">
+                    <button id="addPair">Add</button>
+                    <div id="portfolio">
+                      <h1>portfolio</h1>
+                     </div>
+                  </div>
+              
                 <ul class="list-group">
                     <li class="list-group-item">Cras justo odio</li>
                     <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -124,6 +170,48 @@
                 </ul>
             </div>
         </div>
+
+  <!-- Login form - MODAL -->
+  <div class="modal fade text-dark " id="loginModal">
+    <div class="modal-dialog">
+      <div class="modal-content bg-secondary">
+        <div class="modal-header d-flex flex-row">
+          <img src="./img/logo.png">
+          <button class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div>
+              <h1 class="text-white text-center">Member Login</h1>
+              <h4 id = "loginMessage" class="text-white text-center"></h4>
+            </div>
+
+            <div class="form-group">
+              <i class="fa fa-email "></i>
+              <label for="txtEmail" class="text-white">Email</label>
+              <input type="text" id="txtEmail" class="form-control">
+            </div>
+            <div class="form-group">
+              <i class="fa fa-lock display-inline"></i>
+              <label for="txtPassword" class="text-white">Password</label>
+              <input type="password" id="txtPassword" class="form-control">
+            </div>
+          </form>
+        </div>
+        <div class="">
+          <button id = "btnLogin" class="btn btn-action btn-block">Login</button>
+        </div>
+        <div class="mt-2">
+          <button id = "btnSignUp" class="btn btn-action btn-block">Sign Up</button>
+        </div>
+        <!-- <div class="mt-2">
+          <button id = "btnLogout" class="btn btn-action btn-block">Logout </button>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+
     </div>
 </body>
 </html>
