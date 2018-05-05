@@ -1,57 +1,45 @@
+Chart.pluginService.register({
+    beforeDraw: function (chart, easing) {
+        if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
+            var helpers = Chart.helpers;
+            var ctx = chart.chart.ctx;
+            var chartArea = chart.chartArea;
 
-var dataset = [];
-var dates = []
-$(function(){
-    $.get('https://poloniex.com/public?command=returnChartData&currencyPair=BTC_XMR&start=1405699200&end=9999999999&period=300').then(function(data){
-        data.forEach( function(el, index) {
-            dataset.push(el['open'])
-            dates.push(el['date'])
-        })
-        console.log('working');
-        var ctx = document.getElementById('myChart').getContext('2d');
+            ctx.save();
+            ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+            ctx.fillRect(chartArea.left, chartArea.top, chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
+            ctx.restore();
+        }
+    }
+});
+class drawChart extends poloUrl{
+    renderChart(){
+    var ctx = document.getElementById('myChart').getContext('2d'); 
     var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
 
     // The data for our dataset
     data: {
-        labels: dates,
+        labels: this.date,
         datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: dataset,
-        }]
+            label: this.pair,
+            backgroundColor: 'rgb(0, 0, 0)',
+            borderColor: 'rgb(255, 255, 0)',
+            data: this.close,
+            fill: false,
+            pointRadius: .1,
+        }],
+
     },
 
     // Configuration options go here
-    options: {}
+    options: {responsive:true, 
+        chartArea: {
+        backgroundColor: 'rgba(0, 0, 0, .7)'
+    }
+}
 });
-    }).catch(function(err){
-        console.log(err)
-    });
-
-});
-
-
-
-// var ctx = document.getElementById('myChart').getContext('2d');
-// var chart = new Chart(ctx, {
-//     // The type of chart we want to create
-//     type: 'line',
-
-//     // The data for our dataset
-//     data: {
-//         labels: ["January", "February", "March", "April", "May", "June", "July"],
-//         datasets: [{
-//             label: "My First dataset",
-//             backgroundColor: 'rgb(255, 99, 132)',
-//             borderColor: 'rgb(255, 99, 132)',
-//             data: dataset,
-//         }]
-//     },
-
-//     // Configuration options go here
-//     options: {}
-// });
-
+ 
+}
+}
