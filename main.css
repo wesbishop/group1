@@ -1,4 +1,35 @@
-h2 {
-    text-align: center;
-    font-size: 50px;
+.navbar-light .navbar-brand {
+    color: blue;
+}
+
+.fundrow {
+    border: 1px solid black;
+    margin-top: 5em;
+}
+
+.chart {
+    width: 100%;
+    height: 300px;
+    background-color: lightgray;
+    margin-top: 1em;
+}
+
+.card-group .card-img-top {
+    height: 50px;
+}
+
+.foryourow {
+    margin-top: 5em;
+}
+
+.topmoversrow {
+    margin-top: 5em;
+}
+
+.recentnewsrow {
+    margin-top: 5em;
+}
+
+.list-group {
+    margin-top: 2em;
 }
