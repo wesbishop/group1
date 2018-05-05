@@ -11,35 +11,53 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
   <script src="index.js"></script>
+  <script src="authentication.js"></script>
+  <script src="portfolio.js"></script>
   <script src="User.js"></script>
 </head>
 <body>
+  <!--Ben's Stylings-->
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">CryptScoop</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse"   data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"   aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse " id="navbarNav">
+        <ul class="navbar-nav ">
           <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
+          <li id="menuItemLoadData" class="nav-item btn-primary">
+            <a class="nav-link" href="#">Load Data</a>
+          </li>
+          <li id="menuItemSaveData" class="nav-item btn-primary ml-2 ">
+            <a class="nav-link" href="#">Save Data</a>
+          </li>
+          <li id="menuItemAppUserData" class="nav-item ml-2">
+            <a class="nav-link btn-primary" href="#">Data - AppUser</a>
+          </li>
+          <li id="menuItemFirebaseData" class="nav-item btn btn-primary ml-2 text-white">
+            <a class="nav-link" href="#">Firestore cloud</a>
+          </li>
+
+          <li class="nav-item ml-2">
             <!-- <a class="nav-link" href="#">Login</a> -->
             <a id = "menuItemLogin" href="#loginModal" class="nav-link" data-toggle="modal">Login</a>
           </li>
-          <li id = "menuItemLogout" class="nav-item">
+          <li id = "menuItemLogout" class="nav-item ml-2">
             <a href="#" class="nav-link">Log out</a>
           </li>
         </ul>
         <span id= "userInitial">
-          A
+          <span>A</span>
         </span>
 
       </div>
     </nav>
+
     <div class="page-header">
       <h1>CryptScoop</h1>
     </div>
@@ -102,6 +120,33 @@
         </div>
       </div>
     </div>
+
+
+    <div class="container">
+      <select id = "pairs">
+        <option value="BTC">Bitcoin</option>
+        <option value="BCH">Bitcoin Cash</option>
+        <option value="ETH">Ethereum</option>
+        <option value="XRP">Ripple</option>
+        <option value="LTC">Litecoin</option>
+        <option value="ETC">Ethereum Classic</option>
+        <option value="STR">Stellar</option>
+        <option value="NXT">NXT</option>
+        <option value="ZEC">Zcash</option>
+        <option value="XMR">Monero</option>
+        <option value="DASH">Dash</option>
+        <option value="REP">Augur</option>
+      </select>
+
+      <input id="amount" type="text" class="form-control" placeholder="amount">
+     <button id="addPair">Add</button>
+     <div id="portfolio">
+      <h1>portfolio</h1>
+     </div>
+    
+    </div>
+  
+
   </div>
 
   <!-- Login form - MODAL -->
