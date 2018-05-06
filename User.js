@@ -16,9 +16,10 @@ class User {
     this.firestoreConfig =  {
       timestampsInSnapshots: true
     };
-   
-    this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
-
+  
+    this.currencies = [];
+    //this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+  
     // this.currencies = [{symbol: "BC1", investment: 1000.00, valuation: 1500.00}, 
     //                    {symbol: "BC2", investment: 2000.00, valuation: 2500.00},
     //                    {symbol: "BC3", investment: 3000.00, valuation: 1000.00}]
@@ -38,7 +39,8 @@ class User {
  
   init(firebaseUser) {
     this.email = firebaseUser.email;
-    this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+    // this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+    this.currencies = [];
     this.loadData();
   }
 
@@ -49,7 +51,8 @@ class User {
 
   logout() {
     this.email = "";
-    this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+    // this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+    this.currencies = [];
     this.loadData();
 
   }
@@ -115,7 +118,7 @@ class User {
           this.currencies.push(doc.data());
         })
         // console.log("this = ",this);
-        //  console.log("currencies = ", this.currencies);
+        // console.log("currencies = ", this.currencies);
       } else {
         // console.log('no documents found');
       }

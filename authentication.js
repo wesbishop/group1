@@ -38,6 +38,7 @@ $(function() {
 
 simulations.addEventListener("click", e=> {
   let pair = e.target.dataset["id"];
+  alert(pair);
 
 })    
   btnLogin.addEventListener("click", e=> {
