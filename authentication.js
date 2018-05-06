@@ -10,7 +10,7 @@ $(function() {
   const btnSignUp = document.getElementById("btnSignUp");
   const divLoginModal = document.getElementById("loginModal");
   const loginMessage = document.getElementById("loginMessage");
-  
+  const simulations = document.getElementById("simulations");
 
 
   menuItemLoadData.addEventListener("click", e=> {
@@ -36,7 +36,10 @@ $(function() {
       firebase.auth().signOut();
   })
 
-    
+simulations.addEventListener("click", e=> {
+  let pair = e.target.dataset["id"];
+
+})    
   btnLogin.addEventListener("click", e=> {
       const email = txtEmail.value;
       const password = txtPassword.value;

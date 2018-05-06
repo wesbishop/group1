@@ -12,10 +12,11 @@
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
     <script src="main.js"></script>
-    <script src="authentication.js"></script>
     <script src="portfolio.js"></script>
+    <script src="authentication.js"></script>
     <script src="User.js"></script>
-  
+
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -128,45 +129,36 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="container">
-                    <select id = "pairs">
-                      <option value="BTC">Bitcoin</option>
-                      <option value="BCH">Bitcoin Cash</option>
-                      <option value="ETH">Ethereum</option>
-                      <option value="XRP">Ripple</option>
-                      <option value="LTC">Litecoin</option>
-                      <option value="ETC">Ethereum Classic</option>
-                      <option value="STR">Stellar</option>
-                      <option value="NXT">NXT</option>
-                      <option value="ZEC">Zcash</option>
-                      <option value="XMR">Monero</option>
-                      <option value="DASH">Dash</option>
-                      <option value="REP">Augur</option>
-                    </select>
-              
+            
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <select id = "pairs">
+                            <option value="___"></option>
+                            <option value="BTC">Bitcoin</option>
+                            <option value="BCH">Bitcoin Cash</option>
+                            <option value="ETH">Ethereum</option>
+                            <option value="XRP">Ripple</option>
+                            <option value="LTC">Litecoin</option>
+                            <option value="ETC">Ethereum Classic</option>
+                            <option value="STR">Stellar</option>
+                            <option value="NXT">NXT</option>
+                            <option value="ZEC">Zcash</option>
+                            <option value="XMR">Monero</option>
+                            <option value="DASH">Dash</option>
+                            <option value="REP">Augur</option>
+                          </select>
+                        <!-- <span class="input-group-text">Left addon</span> -->
+                    </div>
                     <input id="amount" type="text" class="form-control" placeholder="amount">
-                    <button id="addPair">Add</button>
-                    <div id="portfolio">
-                      <h1>portfolio</h1>
-                     </div>
+                    <div class="input-group-append">
+                        <button id="addPair">Add Simulation</button>
+                    </div>
                   </div>
               
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                <ul id = "simulations" class="list-group">
+                    <li class="list-group-item">Simulation 1</li>
+                    <li class="list-group-item">Simulation 2</li>
+                    <li class="list-group-item">Simulation 3</li>
                 </ul>
             </div>
         </div>

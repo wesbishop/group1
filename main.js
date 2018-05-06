@@ -14,7 +14,9 @@ $(function() {
       menuItemLogin.classList.remove("d-none");
       userInitial.classList.add("d-none");
       userInitial.innerHTML = "";
+      appUser.logout();
     }
+    // renderPortfolio()
   }
 
   firebase.initializeApp(appUser.firebaseConfig);
