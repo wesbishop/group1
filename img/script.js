@@ -1,29 +1,37 @@
-var newBTCUrl = new drawChart('BTC',86400);
+let makePair = $('body').append("<a id='makePair' value ='BTC'>");
+let curPair = $('#makePair').attr('value');
+
+
+var newBTCUrl = new drawChart(curPair ,86400);
 newBTCUrl.objectMaker();
 
 
-$(function(){
-    $('.fiveMin').click(function(){
+
+
+    $('.fiveMin').on('click', function(){
+        curPair = $('#makePair').attr('value');
         $('#myChart').remove();
         $('iframe').remove();
         $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
 
-        var newSmall = new drawChart('BTC',300);
+        var newSmall = new drawChart(curPair,300);
         newSmall.objectMaker()
     })
-    $('.fourHour').click(function(){
+    $('.fourHour').on('click', function(){
+        curPair = $('#makePair').attr('value');
          $('#myChart').remove();
          $('iframe').remove();
         $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
-        var newMed = new drawChart('BTC',14400);
+        var newMed = new drawChart(curPair,14400);
         newMed.objectMaker()
     })
-    $('.day').click(function(){
+    $('.day').on('click', function(){
+        curPair = $('#makePair').attr('value');
          $('#myChart').remove();
          $('iframe').remove();
         $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
-        var newBTCUrl = new drawChart('ETH',86400);
+        var newBTCUrl = new drawChart(curPair,86400);
         newBTCUrl.objectMaker();
     })
 
-})
+
