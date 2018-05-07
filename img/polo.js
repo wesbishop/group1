@@ -1,11 +1,11 @@
 class poloUrl {
-    constructor(pair) {
+    constructor(pair, period) {
         this.pair = pair;
         this.close = [];
         this.date = [];
         this.end = Math.round((new Date()).getTime() / 1000);
-        this.period = 86400;
-        this.start = this.end - (this.period * 1000);
+        this.period = period;
+        this.start = this.end - (this.period * 500);
         this.url = `https://poloniex.com/public?command=returnChartData&currencyPair=USDT_${pair}&start=${this.start}&end=${this.end}&period=${this.period}`;
     }
     timeConverter(UNIX_timestamp) {
@@ -28,6 +28,7 @@ class poloUrl {
                 this.date.push(this.timeConverter(data[i]['date']));
             }
             this.renderChart();
+
         })
     }
 

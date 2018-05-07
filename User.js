@@ -16,9 +16,10 @@ class User {
     this.firestoreConfig =  {
       timestampsInSnapshots: true
     };
-   
-    this.currencies = [{pair: "BTC", purchased:1405699200,amount: 1000.00}];
-
+  
+    this.currencies = [];
+    //this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+  
     // this.currencies = [{symbol: "BC1", investment: 1000.00, valuation: 1500.00}, 
     //                    {symbol: "BC2", investment: 2000.00, valuation: 2500.00},
     //                    {symbol: "BC3", investment: 3000.00, valuation: 1000.00}]
@@ -38,6 +39,10 @@ class User {
  
   init(firebaseUser) {
     this.email = firebaseUser.email;
+    //this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+    this.currencies = [];
+
+    this.loadData();
   }
 
   login(email, password) {
@@ -45,13 +50,22 @@ class User {
     return auth.signInWithEmailAndPassword(email,password);
   }
 
+  logout() {
+    this.email = "";
+    // this.currencies = [{pair: "BTC", description: "Bitcoin", purchased:1405699200,amount: 1000.00}];
+
+    this.loadData();
+
+  }
+
   signUp(email,password) {
     const auth = firebase.auth();
     return auth.createUserWithEmailAndPassword(email,password);
   }
-  addPair(pair,amount) {
-    let newPair = {"pair": pair, "amount": amount}
+  addPair(pair,description,purchased,amount) {
+    let newPair = {"pair": pair, "description": description,"purchased":purchased, "amount": amount}
     this.currencies.push(newPair);
+    this.storeData();  
   }
 
   consoleLogData() {
@@ -96,7 +110,8 @@ class User {
     this.currencies = [];
     const firestore  = firebase.firestore();
     firestore.settings(this.firestoreConfig);
-    let currenciesCollection =  `portfolio/${this.email}/currencies`;
+    let user = this.email || "no user";
+    let currenciesCollection =  `portfolio/${user}/currencies`;
     let userCurrencies = firestore.collection(currenciesCollection);
     userCurrencies.get().then(function(querySnapshot) {
       if (!querySnapshot.empty) {
@@ -104,7 +119,7 @@ class User {
           this.currencies.push(doc.data());
         })
         // console.log("this = ",this);
-        //  console.log("currencies = ", this.currencies);
+        // console.log("currencies = ", this.currencies);
       } else {
         // console.log('no documents found');
       }
