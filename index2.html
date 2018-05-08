@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,9 +18,29 @@
         <script src="portfolio.js"></script>
         <script src="User.js"></script>
         <link rel="stylesheet" href="index2.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Moon</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <link rel="stylesheet" href="index2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="index.js"></script>
+
 </head>
 
 <body>
+
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#"></a>
@@ -114,6 +135,113 @@
           </div>
       </div>
   </div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">To The Mooooon!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li id="menuItemAppUser" class="nav-item">
+                    <a class="nav-link" href="#">App User</a>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="#">Login</a> -->
+                    <a id="menuItemLogin" href="#loginModal" class="nav-link" data-toggle="modal">Login</a>
+                </li>
+                <li id="menuItemLogout" class="nav-item">
+                    <a href="#" class="nav-link">Log out</a>
+                </li>
+            </ul>
+            <span id="userInitial">
+                A
+            </span>
+
+        </div>
+    </nav>
+
+    <div>
+        <video muted autoplay loop poster='img/videoframe.jpg' class='fullscreen-bg__video'>
+            <source src='video/newCharts.webm' type='video/webm'>
+            <source src='video/newCharts.mp4' type='video/mp4'>
+            <source src='video/newCharts.ogv' type='video/ogg'>
+        </video>
+        <div class='overlay'>
+            <h1 class='title animated infinite pulse' id='title'>To The Mooooon!</h1>
+            <br>
+            <h3 class='description'>Real-time crypto charting and portfolio tracking.</h3>
+            <br>
+            <br>
+            <input type='submit' value='Sign Up' id='signUp' href="#loginModal" data-toggle="modal">
+            <input type='submit' value='Login' href="#loginModal" href="#loginModal" data-toggle="modal">
+        </div>
+        <!-- <br>
+        <div class='overlay2'>
+            <img class='ml-3' id='computer' src='https://media.istockphoto.com/photos/blank-computer-monitor-isolated-on-white-background-picture-id480819464?k=6&m=480819464&s=612x612&w=0&h=YgKurUf_8u90X8VwWL3dvYUUqYB5UBaHrwADptZREfg='>
+        </div> -->
+    </div>
+
+    <!-- Login form - MODAL -->
+    <div class="modal fade text-dark " id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark">
+                <div class="modal-header d-flex flex-row">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div>
+                            <h1 class="text-white text-center">
+                                <i>Member Login</i>
+                            </h1>
+                            <h4 id="loginMessage" class="text-white text-center"></h4>
+                        </div>
+
+                        <div class="form-group">
+                            <i class="fa fa-email "></i>
+                            <label for="txtEmail" class="text-white">
+                                <i>Email</i>
+                            </label>
+                            <input type="text" id="txtEmail" class="form-control" placeholder='Enter your email address.'>
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-lock display-inline"></i>
+                            <label for="txtPassword" class="text-white">
+                                <i>Password</i>
+                            </label>
+                            <input type="password" id="txtPassword" class="form-control" placeholder='Enter your password.'>
+                        </div>
+                    </form>
+                </div>
+                <div class="mr-1" align='center' id='buttons'>
+                    <button id="btnLogin" class="btn btn-action btn-secondary">Login</button>
+                    <button id="btnSignUp" class="btn btn-action btn-secondary">Sign Up</button>
+                </div>
+                <div class="mt-2 mb-2" align='center' id='forgot'>
+                    <a href='#'>
+                        <i>
+                            <b>Forgot your password?</b>
+                        </i>
+                    </a>
+                </div>
+                <!-- <div class="mt-2">
+          <button id = "btnLogout" class="btn btn-action btn-block">Logout </button>
+        </div> -->
+
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
