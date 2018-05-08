@@ -61,9 +61,18 @@ class User {
     const auth = firebase.auth();
     return auth.createUserWithEmailAndPassword(email,password);
   }
+
   addPair(pair,description,purchased,amount) {
     let newPair = {"pair": pair, "description": description,"purchased":purchased, "amount": amount}
     this.currencies.push(newPair);
+    this.storeData();  
+  }
+
+  deletePair(pair) {
+    let idx = this.currencies.findIndex(element => {
+      return element.pair == pair;
+    })
+    this.currencies.splice(idx,1);
     this.storeData();  
   }
 
@@ -84,24 +93,31 @@ class User {
         .orderBy("pair")
         .onSnapshot(dataSnapshot => {
           dataSnapshot.docs.forEach( doc => {
-            console.log(doc.data());
+            //console.log(doc.data());
           })
           // console.log(dataSnapshot.docs);
         });
   }
 
   storeData() {
+    //this.deleteData();
+    //ADAM#2
+    //async - storeData executes then this.deleteData completes erasing saved changes
+
+    console.log("storeData");
     const firestore  = firebase.firestore();
     firestore.settings(this.firestoreConfig);
     this.currencies.forEach(key => {
       let docID  = `portfolio/${this.email}/currencies/${key.pair}` ;
       let docRef = firestore.doc(docID);
-      docRef.set(key).then(result => {
-        // console.log("data was saved");
-      }).catch(error => {
-        // console.log("error saving data");
-      });
-    })
+      console.log("saving " + docID)
+      docRef.set(key)
+        .then(result => {
+        })
+        .catch(error => {
+        console.log("error saving data");
+        });
+    })  //forEach
   }
 
   loadData() {
@@ -142,6 +158,36 @@ class User {
 
 
   }
+
+  deleteData() {
+
+    this.currencies = [];
+    const firestore  = firebase.firestore();
+    firestore.settings(this.firestoreConfig);
+
+    let user = this.email || "no user";
+    let currenciesCollection =  `portfolio/${user}/currencies`;
+    let userCurrencies = firestore.collection(currenciesCollection);
+    userCurrencies.get()
+     .then(function(querySnapshot) {
+       if (!querySnapshot.empty) {
+         querySnapshot.docs.forEach(doc => {
+         console.log("deleting:" + doc.ref);
+         doc.ref.delete()
+           .then(function() {
+             console.log("Document deleted!");
+           })
+           .catch(function(error) {
+             console.error("Error removing document: ", error);
+           });
+         }) //for each
+       } else {
+         console.log('no documents found');
+       }
+     }.bind(this));
+    
+
+  } //delete data
 
 
 }

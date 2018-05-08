@@ -14,12 +14,10 @@ $(function() {
 
 
   menuItemLoadData.addEventListener("click", e=> {
-    //console.log("user email:", appUser.email);
     appUser.loadData();
   })
 
   menuItemSaveData.addEventListener("click", e=> {
-    //console.log("user email:", appUser.email);
     appUser.storeData();
   })
 
@@ -36,36 +34,32 @@ $(function() {
       firebase.auth().signOut();
   })
 
-simulations.addEventListener("click", e=> {
-  let pair = e.target.dataset["id"];
-  alert(pair);
 
-})    
   btnLogin.addEventListener("click", e=> {
-      const email = txtEmail.value;
-      const password = txtPassword.value;
+    const email = txtEmail.value;
+    const password = txtPassword.value;
 
-      appUser.login(email,password)
-      .then(value => {
-        console.log(value);
-        $(divLoginModal).modal("toggle");
-        //how to toggle with vanilla JS ?
-      })
-      .catch(e=>  {
-        loginMessage.innerHTML = e.message;
-      });
-  })  //btnLogin.addEventListener
+    appUser.login(email,password)
+    .then(value => {
+      $(divLoginModal).modal("toggle");
+    })
+    .catch(e=>  {
+      loginMessage.innerHTML = e.message;
+    });
+})  //btnLogin.addEventListener
 
-  btnSignUp.addEventListener("click",e => {
-      const email = txtEmail.value;
-      const password = txtPassword.value;
-     
-      appUser.signUp(email,password)
-      .catch(e=> {
-        loginMessage.innerHTML = e.message; 
-      });
-
-  })
+btnSignUp.addEventListener("click",e => {
+    const email = txtEmail.value;
+    const password = txtPassword.value;
+   
+    appUser.signUp(email,password)
+    .catch(e=> {
+      loginMessage.innerHTML = e.message; 
+    });
 
 })
+
+})    
+
+
 

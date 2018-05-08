@@ -16,8 +16,6 @@ $(function() {
       userInitial.innerHTML = "";
       appUser.logout();
     }
-    // console.log("renderUserLoggedIn",value);
-    // console.log(appUser);
     renderPortfolio()
   }
 
@@ -33,7 +31,7 @@ $(function() {
     
     //Input validation
     if (pair == "___" || amount == "" || isNaN(amount)) {
-      alert("You must provide a 'pair' and an 'amount'")
+      alert("You must provide a 'pair' and 'amount'")
       renderPortfolio();
       return;
     }
@@ -45,7 +43,6 @@ $(function() {
       }
     });
     if (!isInSimulator) {
-      console.log("pair",pair,description,amount);
       appUser.addPair(pair,description,new Date(),amount);
     }
 
@@ -56,28 +53,51 @@ $(function() {
     renderPortfolio();
    
   })
- 
+
+  simulations.addEventListener("click", e=> {
+    let pair = "";
+    if (e.target.hasAttribute("data-id")) {
+      pair = e.target.dataset["id"];
+    }
+    if (pair == "") return;
+    
+    if (e.target.classList.contains("delete-pair")) {
+      appUser.deletePair(pair);
+      renderPortfolio();
+    } else {
+      //Display chart
+      alert("display chart");
+    }
+
+  });
+
+
  function renderPortfolio() {
   let divSimulations = document.getElementById("simulations")
   let htmlSimulations = ""
+  let htmlListItem = ""
 
-  //ADAM help tuesday
+  //ADAM#1 help tuesday
   console.log(appUser.currencies.length,typeof appUser.currencies, appUser.currencies)
 
 
   appUser.currencies.forEach(element => {
-    console.log("pair",element.pair)
-    htmlSimulations += `<li class="list-group-item list-group-item-action" data-id="${element.pair}">
-                        ${element.pair}-${element.description}
-                        </li>`
-                        });
 
-  // console.log(appUser);
-  console.log("htmlSimulations",htmlSimulations);                        
+    htmlListItem =  `<li class="list-group-item list-group-item-action" data-id="${element.pair}">
+                       <div class="d-flex justify-content-between" data-id="${element.pair}">
+                         <div data-id="${element.pair}">${element.pair}-${element.description}</div>
+                         <div>
+                           <button type='button' data-id="${element.pair}" class='btn btn-default delete-pair'>X
+                           </button>
+                         </div>
+                        </div>
+                      </li>`
+    htmlSimulations += htmlListItem ;
+    });
+
   divSimulations.innerHTML = htmlSimulations;
  
 }
-
 
  firebase.initializeApp(appUser.firebaseConfig);
 
