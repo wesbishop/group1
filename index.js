@@ -1,34 +1,55 @@
 $(function() {
-
   appUser = new User();
     
-  function renderUserLoggedIn(value) {
-    if (value) {
-      menuItemLogout.classList.remove("d-none");
-      menuItemLogin.classList.add("d-none");
-      userInitial.classList.remove("d-none");
-      userInitial.innerHTML = appUser.email.toString().substring(0,1) ;
-    } else
-     {
-      menuItemLogout.classList.add("d-none");
-      menuItemLogin.classList.remove("d-none");
-      userInitial.classList.add("d-none");
-      userInitial.innerHTML = "";
-    }
-  }
+  const txtEmail = document.getElementById("txtEmail");
+  const txtPassword = document.getElementById("txtPassword");
+  const loginMessage = document.getElementById("loginMessage");
+  
+  const txtSignUpEmail = document.getElementById("txtSignUpEmail");
+  const txtSignUpPassword = document.getElementById("txtSignUpPassword");
+  const signUpMessage = document.getElementById("signUpMessage");
 
-  firebase.initializeApp(appUser.firebaseConfig);
+  btnLogin.addEventListener("click", e=> {
+    const email = txtEmail.value;
+    const password = txtPassword.value;
+  
+    appUser.login(email,password)
+    .then(value => {
+      const divLoginModal = document.getElementById("loginModal");
+      $(divLoginModal).modal("toggle");
+    })
+    .catch(e=>  {
+      loginMessage.innerHTML = e.message;
+    });
+  })  //btnLogin.addEventListener
+
+
+  btnSignUp.addEventListener("click",e => {
+  
+    const email = txtSignUpEmail.value;
+    const password = txtSignUpPassword.value;
+    appUser.signUp(email,password)
+    .catch(e=> {
+      signUpMessage.innerHTML = e.message; 
+    });
+  })
+
+
+ firebase.initializeApp(appUser.firebaseConfig);
 
   //add a realtime listener
   firebaseUser = firebase.auth().currentUser;
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
-    appUser.init(firebaseUser);
-    renderUserLoggedIn(true);
-    } else {
-        renderUserLoggedIn(false);
-     }
+    var init = async function() { // async function expression assigned to a variable
+      await appUser.init(firebaseUser);
+      window.location.replace("./main.html");
+      return ;
+    }();
+  } else {
+      //stay on this page
+      }
   });
 
 

@@ -15,6 +15,7 @@ Chart.pluginService.register({
 class drawChart extends poloUrl{
     renderChart(){
     var ctx = document.getElementById('myChart').getContext('2d'); 
+
     var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
@@ -37,9 +38,18 @@ class drawChart extends poloUrl{
     options: {responsive:true, 
         chartArea: {
         backgroundColor: 'rgba(0, 0, 0, .7)'
+        }
     }
-}
 });
  
 }
+    clearChart(){
+        var div = document.getElementById('chart');
+        var cx = document.getElementById('myChart');
+            document.remove(cx);
+            var canv = document.createElement('myChart')
+            canv.id = 'myChart';
+            document.div.appendChild(canv);
+    }
+
 }
