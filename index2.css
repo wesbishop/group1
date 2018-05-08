@@ -1,18 +1,6 @@
-.fullscreen-bg__video {
-    border-right: none;
-    border-left: none;
-    border-bottom: none;
-    border-top: none;
-    position: absolute;
+html,
+body {
     height: 100%;
-    width: 100%;
-    background: black;
-}
-
-@media (min-width: 600px) {
-    .element {
-        background: #000;
-    }
 }
 
 .navbar-brand {
@@ -21,38 +9,41 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.overlay {
-    position: absolute;
-    top: 20%;
-    left: 60%;
-    z-index: 0;
-    color: white;
-    font-style: italic;
-    font-family: fantasy;
+.stage {
+    background: url('https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260') center center no-repeat;
+    background-size: cover;
+    color: navy;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    opacity: 0.9;
 }
 
-.overlay input[type='submit'] {
-    height: 60px;
-    width: 100px;
-    font-size: 22px;
+.subStage {
+    color: white;
+    text-align: center;
+    margin-top: 6rem;
+    margin-left: 2rem;
+}
+
+.subStage input[type='submit'] {
+    height: 3rem;
+    width: 5rem;
+    font-size: 1.2rem;
     border: none;
     outline: none;
-    border-radius: 10px;
+    border-radius: 1.1rem;
     background: lightgrey;
 }
 
-.overlay input[type='submit']:hover {
+.subStage input[type='submit']:hover {
     cursor:  pointer;
     background: white;
     color: gray;
 }
 
-#title {
-    margin-left: 25%;
-}
-
 #signUp {
-    margin-left: 25%;
+    margin-top: 10%;
     margin-right: 25%;
 }
 
