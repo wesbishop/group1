@@ -1,6 +1,39 @@
+$(function() {
 
-  var appUser = new User();
+  appUser = new User();
     
+  const menuItemLogin = document.getElementById("menuItemLogin");
+  const menuItemFeatures = document.getElementById("menuItemFeatures");
+  const menuItemLogout = document.getElementById("menuItemLogout");
+  const txtEmail = document.getElementById("txtEmail");
+  const txtPassword = document.getElementById("txtPassword");
+  const btnLogin = document.getElementById("btnLogin");
+  const userInitial = document.getElementById("userInitial");
+  const btnSignUp = document.getElementById("btnSignUp");
+  const divLoginModal = document.getElementById("loginModal");
+  const loginMessage = document.getElementById("loginMessage");
+  const simulations = document.getElementById("simulations");
+
+
+  menuItemLogout.addEventListener("click", e=> {
+      firebase.auth().signOut();
+      window.location.replace("./index.html");
+  })
+
+  btnLogin.addEventListener("click", e=> {
+    const email = txtEmail.value;
+    const password = txtPassword.value;
+
+    appUser.login(email,password)
+    .then(value => {
+      $(divLoginModal).modal("toggle");
+    })
+    .catch(e=>  {
+      loginMessage.innerHTML = e.message;
+    });
+})  //btnLogin.addEventListener
+
+
   function renderUserLoggedIn(value) {
     if (value) {
       menuItemLogout.classList.remove("d-none");
@@ -15,10 +48,24 @@
       userInitial.innerHTML = "";
       appUser.logout();
     }
-    // console.log("renderUserLoggedIn",value);
-    // console.log(appUser);
-    renderPortfolio()
+    // renderPortfolio()
   }
+
+  menuItemLoadData.addEventListener("click", e=> {
+    appUser.loadData();
+  })
+
+  menuItemSaveData.addEventListener("click", e=> {
+    appUser.storeData();
+  })
+
+  menuItemAppUserData.addEventListener("click", e=> {
+    appUser.consoleLogData();
+  })
+
+  menuItemFirebaseData.addEventListener("click", e=> {
+    appUser.consoleLogFirebaseData();
+  })
 
 
   addPair.addEventListener("click", e => {
@@ -32,7 +79,7 @@
     
     //Input validation
     if (pair == "___" || amount == "" || isNaN(amount)) {
-      alert("You must provide a 'pair' and an 'amount'")
+      alert("You must provide a 'pair' and 'amount'")
       renderPortfolio();
       return;
     }
@@ -44,7 +91,6 @@
       }
     });
     if (!isInSimulator) {
-      console.log("pair",pair,description,amount);
       appUser.addPair(pair,description,new Date(),amount);
     }
 
@@ -55,43 +101,90 @@
     renderPortfolio();
    
   })
+
+  simulations.addEventListener("click", e=> {
+    let pair = "";
+    if (e.target.hasAttribute("data-id")) {
+      pair = e.target.dataset["id"];
+    
+    }
+    if (pair == "") return;
+
+    
+    if (e.target.classList.contains("delete-pair")) {
+      appUser.deletePair(pair);
+      renderPortfolio();
+    } else {
+      //Display chart
+      let curTime = Number($('#makePair').attr('time'));
+      $('#makePair').remove();
+      $('body').append(`<a id='makePair' value =${pair} time=${curTime}>`);
+      let curPair = $('#makePair').attr('value');
+       $('#myChart').remove();
+       $('iframe').remove();
+      $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
+      var newUrl = new drawChart(pair,curTime);
+      newUrl.objectMaker();
+      // alert("display chart");
+    }
+
+  });
+
+
+
+
+ function renderPortfolio() {
+  let divSimulations = document.getElementById("simulations")
+  let htmlSimulations = ""
+  let htmlListItem = ""
+
+  //ADAM#1 help tuesday
+  console.log("appCurrencies",appUser.currencies.length,typeof appUser.currencies, appUser.currencies)
+
+
+  appUser.currencies.forEach(element => {
+    let amount = parseInt(element.amount).toLocaleString();
+    htmlListItem =  `<li class="list-group-item list-group-item-action px-0" data-id="${element.pair}">
+                       <div class="d-flex justify-content-start" data-id="${element.pair}">
+                         <div data-id="${element.pair}" class="col-6">${element.pair}-${element.description}</div>
+                         <div data-id="${element.pair}" class="text-right col-3">${amount}</div>
+                         <div class="col-3 text-center justify-content-end">
+                           <button type='button' data-id="${element.pair}" class=' btn btn-default delete-pair'>X
+                           </button>
+                         </div>
+                        </div>
+                      </li>`
+    htmlSimulations += htmlListItem ;
+    });
+
+  divSimulations.innerHTML = htmlSimulations;
  
+}
 
-
-  firebase.initializeApp(appUser.firebaseConfig);
+ firebase.initializeApp(appUser.firebaseConfig);
 
   //add a realtime listener
   firebaseUser = firebase.auth().currentUser;
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
-    appUser.init(firebaseUser);
+    console.log("Logged in");
+    var init = async function() { // async function expression assigned to a variable
+      await appUser.init(firebaseUser);
+      console.log("finished init");
+      console.log(appUser.currencies);
+      renderPortfolio();
+      return ;
+    }();
+
+    // appUser.init(firebaseUser);
+
     renderUserLoggedIn(true);
-    renderPortfolio();
+    // renderPortfolio();
   } else {
         renderUserLoggedIn(false);
-     }
-    renderPortfolio();
+        renderPortfolio();
+      }
   });
 
-
-  function renderPortfolio() {
-  appUser.loadData;
-  let divSimulations = document.getElementById("simulations")
-  var htmlSimulations = ""
-
-  //ADAM help tuesday
-  console.log(appUser.currencies.length,typeof appUser.currencies, appUser.currencies)
-
-  appUser.currencies.forEach(element => {
-    htmlSimulations += `<li class="list-group-item list-group-item-action" data-id="${element.pair}">
-                        ${element.pair}-${element.description}
-                        </li>`
-                        });
-
-  // console.log(appUser);
-  console.log("htmlSimulations",htmlSimulations);                        
-  divSimulations.innerHTML = htmlSimulations;
- 
-}
-
+});
