@@ -131,20 +131,6 @@ $(function() {
   });
 
 
-  simulations.addEventListener("click", e=> {
-    let pair = e.target.dataset["id"];
-
-    let curTime = Number($('#makePair').attr('time'));
-    $('#makePair').remove();
-    $('body').append(`<a id='makePair' value =${pair} time=${curTime}>`);
-    let curPair = $('#makePair').attr('value');
-     $('#myChart').remove();
-     $('iframe').remove();
-    $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
-    var newUrl = new drawChart(pair,curTime);
-    newUrl.objectMaker();
-   })
-
  function renderPortfolio() {
   let divSimulations = document.getElementById("simulations")
   let htmlSimulations = ""
