@@ -33,17 +33,6 @@ $(function() {
     });
 })  //btnLogin.addEventListener
 
-// btnSignUp.addEventListener("click",e => {
-//     const email = txtEmail.value;
-//     const password = txtPassword.value;
-   
-//     appUser.signUp(email,password)
-//     .catch(e=> {
-//       loginMessage.innerHTML = e.message; 
-//     });
-
-// })
-
 
   function renderUserLoggedIn(value) {
     if (value) {
@@ -117,19 +106,44 @@ $(function() {
     let pair = "";
     if (e.target.hasAttribute("data-id")) {
       pair = e.target.dataset["id"];
+    
     }
     if (pair == "") return;
+
     
     if (e.target.classList.contains("delete-pair")) {
       appUser.deletePair(pair);
       renderPortfolio();
     } else {
       //Display chart
-      alert("display chart");
+      let curTime = Number($('#makePair').attr('time'));
+      $('#makePair').remove();
+      $('body').append(`<a id='makePair' value =${pair} time=${curTime}>`);
+      let curPair = $('#makePair').attr('value');
+       $('#myChart').remove();
+       $('iframe').remove();
+      $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
+      var newUrl = new drawChart(pair,curTime);
+      newUrl.objectMaker();
+      // alert("display chart");
     }
 
   });
 
+
+  simulations.addEventListener("click", e=> {
+    let pair = e.target.dataset["id"];
+
+    let curTime = Number($('#makePair').attr('time'));
+    $('#makePair').remove();
+    $('body').append(`<a id='makePair' value =${pair} time=${curTime}>`);
+    let curPair = $('#makePair').attr('value');
+     $('#myChart').remove();
+     $('iframe').remove();
+    $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
+    var newUrl = new drawChart(pair,curTime);
+    newUrl.objectMaker();
+   })
 
  function renderPortfolio() {
   let divSimulations = document.getElementById("simulations")
