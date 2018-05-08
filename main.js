@@ -131,8 +131,6 @@ $(function() {
   });
 
 
-
-
  function renderPortfolio() {
   let divSimulations = document.getElementById("simulations")
   let htmlSimulations = ""
