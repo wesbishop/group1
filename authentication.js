@@ -38,15 +38,17 @@ $(function() {
 
 simulations.addEventListener("click", e=> {
   let pair = e.target.dataset["id"];
+  let curTime = Number($('#makePair').attr('time'));
   $('#makePair').remove();
-  $('body').append(`<a id='makePair' value =${pair}>`);
-  var curPair = $('#makePair').attr('value');
+  $('body').append(`<a id='makePair' value =${pair} time=${curTime}>`);
+  let curPair = $('#makePair').attr('value');
    $('#myChart').remove();
    $('iframe').remove();
   $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
-  var newUrl = new drawChart(pair,86400);
+  var newUrl = new drawChart(pair,curTime);
   newUrl.objectMaker();
-})  
+}) 
+   
   
   btnLogin.addEventListener("click", e=> {
       const email = txtEmail.value;
