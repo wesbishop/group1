@@ -2,6 +2,49 @@ $(function() {
 
   appUser = new User();
     
+  const menuItemLogin = document.getElementById("menuItemLogin");
+  const menuItemFeatures = document.getElementById("menuItemFeatures");
+  const menuItemLogout = document.getElementById("menuItemLogout");
+  const txtEmail = document.getElementById("txtEmail");
+  const txtPassword = document.getElementById("txtPassword");
+  const btnLogin = document.getElementById("btnLogin");
+  const userInitial = document.getElementById("userInitial");
+  const btnSignUp = document.getElementById("btnSignUp");
+  const divLoginModal = document.getElementById("loginModal");
+  const loginMessage = document.getElementById("loginMessage");
+  const simulations = document.getElementById("simulations");
+
+
+  menuItemLogout.addEventListener("click", e=> {
+      firebase.auth().signOut();
+      window.location.replace("./index.html");
+  })
+
+  btnLogin.addEventListener("click", e=> {
+    const email = txtEmail.value;
+    const password = txtPassword.value;
+
+    appUser.login(email,password)
+    .then(value => {
+      $(divLoginModal).modal("toggle");
+    })
+    .catch(e=>  {
+      loginMessage.innerHTML = e.message;
+    });
+})  //btnLogin.addEventListener
+
+// btnSignUp.addEventListener("click",e => {
+//     const email = txtEmail.value;
+//     const password = txtPassword.value;
+   
+//     appUser.signUp(email,password)
+//     .catch(e=> {
+//       loginMessage.innerHTML = e.message; 
+//     });
+
+// })
+
+
   function renderUserLoggedIn(value) {
     if (value) {
       menuItemLogout.classList.remove("d-none");
@@ -16,8 +59,24 @@ $(function() {
       userInitial.innerHTML = "";
       appUser.logout();
     }
-    renderPortfolio()
+    // renderPortfolio()
   }
+
+  menuItemLoadData.addEventListener("click", e=> {
+    appUser.loadData();
+  })
+
+  menuItemSaveData.addEventListener("click", e=> {
+    appUser.storeData();
+  })
+
+  menuItemAppUserData.addEventListener("click", e=> {
+    appUser.consoleLogData();
+  })
+
+  menuItemFirebaseData.addEventListener("click", e=> {
+    appUser.consoleLogFirebaseData();
+  })
 
 
   addPair.addEventListener("click", e => {
@@ -78,16 +137,17 @@ $(function() {
   let htmlListItem = ""
 
   //ADAM#1 help tuesday
-  console.log(appUser.currencies.length,typeof appUser.currencies, appUser.currencies)
+  console.log("appCurrencies",appUser.currencies.length,typeof appUser.currencies, appUser.currencies)
 
 
   appUser.currencies.forEach(element => {
-
-    htmlListItem =  `<li class="list-group-item list-group-item-action" data-id="${element.pair}">
-                       <div class="d-flex justify-content-between" data-id="${element.pair}">
-                         <div data-id="${element.pair}">${element.pair}-${element.description}</div>
-                         <div>
-                           <button type='button' data-id="${element.pair}" class='btn btn-default delete-pair'>X
+    let amount = parseInt(element.amount).toLocaleString();
+    htmlListItem =  `<li class="list-group-item list-group-item-action px-0" data-id="${element.pair}">
+                       <div class="d-flex justify-content-start" data-id="${element.pair}">
+                         <div data-id="${element.pair}" class="col-6">${element.pair}-${element.description}</div>
+                         <div data-id="${element.pair}" class="text-right col-3">${amount}</div>
+                         <div class="col-3 text-center justify-content-end">
+                           <button type='button' data-id="${element.pair}" class=' btn btn-default delete-pair'>X
                            </button>
                          </div>
                         </div>
@@ -106,13 +166,23 @@ $(function() {
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
-    appUser.init(firebaseUser);
+    console.log("Logged in");
+    var init = async function() { // async function expression assigned to a variable
+      await appUser.init(firebaseUser);
+      console.log("finished init");
+      console.log(appUser.currencies);
+      renderPortfolio();
+      return ;
+    }();
+
+    // appUser.init(firebaseUser);
+
     renderUserLoggedIn(true);
-    renderPortfolio();
+    // renderPortfolio();
   } else {
         renderUserLoggedIn(false);
-     }
-    renderPortfolio();
+        renderPortfolio();
+      }
   });
 
 });
