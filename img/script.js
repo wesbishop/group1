@@ -76,6 +76,7 @@ var timeSeries = function(){
        $('.reset').on('click', function(){
          let curColor = $('#makePair').attr('color');
         curTime = Number($('#makePair').attr('time'));
+        curRepeat = Number($('#makePair').attr('repeat'));
         $('#makePair').attr('repeat', 500);
         var newReset = new drawChart(timeSeries(), curTime, curRepeat, curColor);
         newReset.objectMaker();
