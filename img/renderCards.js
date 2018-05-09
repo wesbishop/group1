@@ -1,4 +1,4 @@
-function renderCards(data){
+const renderCards = async (data) => {
   var cardHTML = '';
   let end = Math.round((new Date()).getTime() / 1000);
   let start = end - (86400* 2);
@@ -6,7 +6,7 @@ function renderCards(data){
   let percent = 0;
   let text = 'text-dark';
   $('.portCard').empty();
-  data.forEach(function(el){
+  await data.forEach(function(el){
     let url = `https://poloniex.com/public?command=returnChartData&currencyPair=USDT_${el.pair}&start=${start}&end=${end}&period=86400`
     $.get(url).then((data)=>{
       if(data[1].close > data[0].close){
