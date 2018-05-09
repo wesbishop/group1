@@ -14,7 +14,7 @@ Chart.pluginService.register({
 });
 class drawChart extends poloUrl{
     renderChart(){
-    var ctx = document.getElementById('myChart').getContext('2d'); 
+    var ctx = document.getElementById('myChart').getContext('2d');
 
     var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -26,7 +26,7 @@ class drawChart extends poloUrl{
         datasets: [{
             label: this.pair,
             backgroundColor: 'rgb(0, 0, 0)',
-            borderColor: 'rgb(255, 255, 255)',
+            borderColor: this.color,
             data: this.close,
             fill: false,
             pointRadius: .1,
@@ -35,7 +35,7 @@ class drawChart extends poloUrl{
     },
 
     // Configuration options go here
-    options: {responsive:true, 
+    options: {responsive:true,
         chartArea: {
         backgroundColor: 'rgba(0, 0, 0, .7)'
         },
@@ -58,7 +58,7 @@ class drawChart extends poloUrl{
         }
     }
 });
- 
+
 }
     clearChart(){
         var div = document.getElementById('chart');
