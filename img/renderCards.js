@@ -4,6 +4,7 @@ function renderCards(data){
   let start = end - (86400* 2);
   let prices = [];
   let text = 'text-dark';
+  $('.portCard').empty();
   data.forEach(function(el){
     let url = `https://poloniex.com/public?command=returnChartData&currencyPair=USDT_${el.pair}&start=${start}&end=${end}&period=86400`
     $.get(url).then((data)=>{
