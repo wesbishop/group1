@@ -21,8 +21,8 @@ class poloUrl {
         var date = a.getDate();
         var hour = a.getHours();
         var min = a.getMinutes();
-        var sec = a.getSeconds();
-        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+        // var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min; //+ ':' + sec;
         return time;
     }
 
