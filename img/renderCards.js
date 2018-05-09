@@ -8,7 +8,7 @@ const renderCards = async (data) => {
   $('.portCard').empty();
   await data.forEach(function(el){
     let url = `https://poloniex.com/public?command=returnChartData&currencyPair=USDT_${el.pair}&start=${start}&end=${end}&period=86400`
-    $.get(url).then((data)=>{
+    $.get(url).done((data)=>{
       if(data[1].close > data[0].close){
         text = 'text-success';
       }else{
