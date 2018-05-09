@@ -1,7 +1,7 @@
 $(function() {
 
   appUser = new User();
-    
+
   const menuItemLogin = document.getElementById("menuItemLogin");
   const menuItemFeatures = document.getElementById("menuItemFeatures");
   const menuItemLogout = document.getElementById("menuItemLogout");
@@ -76,7 +76,7 @@ $(function() {
     let amount = document.getElementById("amount").value;
     let isInSimulator = false;
 
-    
+
     //Input validation
     if (pair == "___" || amount == "" || isNaN(amount)) {
       alert("You must provide a 'pair' and 'amount'")
@@ -99,18 +99,18 @@ $(function() {
     document.getElementById("pairs").value = "___";
 
     renderPortfolio();
-   
+
   })
 
   simulations.addEventListener("click", e=> {
     let pair = "";
     if (e.target.hasAttribute("data-id")) {
       pair = e.target.dataset["id"];
-    
+
     }
     if (pair == "") return;
 
-    
+
     if (e.target.classList.contains("delete-pair")) {
       appUser.deletePair(pair);
       renderPortfolio();
@@ -125,6 +125,7 @@ $(function() {
        $('iframe').remove();
       $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
       var newUrl = new drawChart(pair,curTime, curRepeat);
+      newUrl.colorPick();
       newUrl.objectMaker();
       // alert("display chart");
     }
@@ -157,7 +158,7 @@ $(function() {
     });
 
   divSimulations.innerHTML = htmlSimulations;
- 
+
 }
 
  firebase.initializeApp(appUser.firebaseConfig);
