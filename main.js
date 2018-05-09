@@ -142,12 +142,12 @@ $(function() {
 
   appUser.currencies.forEach(element => {
     let amount = parseInt(element.amount).toLocaleString();
-    htmlListItem =  `<li class="list-group-item list-group-item-action px-0" data-id="${element.pair}">
+    htmlListItem =  `<li class="list-group-item bg-dark text-light list-group-item-action px-0" data-id="${element.pair}">
                        <div class="d-flex justify-content-start" data-id="${element.pair}">
                          <div data-id="${element.pair}" class="col-6">${element.pair}-${element.description}</div>
                          <div data-id="${element.pair}" class="text-right col-3">${amount}</div>
                          <div class="col-3 text-center justify-content-end">
-                           <button type='button' data-id="${element.pair}" class=' btn btn-default delete-pair'>X
+                           <button type='button' data-id="${element.pair}" class=' btn btn-danger delete-pair'>X
                            </button>
                          </div>
                         </div>
