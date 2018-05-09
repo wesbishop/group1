@@ -5,7 +5,6 @@ let curRepeat = Number($('#makePair').attr('repeat'));
 
 
 var newBTCUrl = new drawChart(curPair ,curTime);
-$('#makePair').attr('color', newBTCUrl.colorPick());
 newBTCUrl.objectMaker();
 
 
