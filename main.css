@@ -1,7 +1,9 @@
 body {
     background-color: black;
 }
-
+.portCard {
+  height: auto;
+}
 .amount{
     width: 4rem;
 }
