@@ -10,13 +10,14 @@ body {
 }
 
 .stage {
-    background: url('https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260') center center no-repeat;
+    background: url('cryptopulse.jpeg') center center no-repeat;
     background-size: cover;
     color: navy;
     height: 100%;
     width: 100%;
     display: flex;
     opacity: 0.9;
+    padding-top: 6em;
 }
 
 .subStage {

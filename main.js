@@ -17,7 +17,7 @@ $(function() {
 
   menuItemLogout.addEventListener("click", e=> {
       firebase.auth().signOut();
-      window.location.replace("./index.html");
+      window.location.replace("./index2.html");
   })
 
   btnLogin.addEventListener("click", e=> {
@@ -51,21 +51,21 @@ $(function() {
     // renderPortfolio()
   }
 
-  menuItemLoadData.addEventListener("click", e=> {
-    appUser.loadData();
-  })
+  // menuItemLoadData.addEventListener("click", e=> {
+  //   appUser.loadData();
+  // })
 
-  menuItemSaveData.addEventListener("click", e=> {
-    appUser.storeData();
-  })
+  // menuItemSaveData.addEventListener("click", e=> {
+  //   appUser.storeData();
+  // })
 
-  menuItemAppUserData.addEventListener("click", e=> {
-    appUser.consoleLogData();
-  })
+  // menuItemAppUserData.addEventListener("click", e=> {
+  //   appUser.consoleLogData();
+  // })
 
-  menuItemFirebaseData.addEventListener("click", e=> {
-    appUser.consoleLogFirebaseData();
-  })
+  // menuItemFirebaseData.addEventListener("click", e=> {
+  //   appUser.consoleLogFirebaseData();
+  // })
 
 
   addPair.addEventListener("click", e => {
