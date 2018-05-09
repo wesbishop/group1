@@ -20,14 +20,15 @@
     <!-- <script src="portfolio.js"></script> -->
 
     <script src="User.js"></script>
-
-
-
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!-- <script src="portfolio.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">CryptoPulse</a>
+        <a class="navbar-brand animated infinite pulse" href="#">CryptoPulse</a>
         <form class="form-inline my-2 my-lg-0">
 
 
@@ -40,7 +41,7 @@
         <div class="collapse navbar-collapse flex-row justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index2.html#">Home
+                    <a class="nav-link" href="index.html#">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -63,24 +64,28 @@
         </div>
     </nav>
 
-    <div class="container">
 
-    </div>
-    <div class='row' id='space'>
-        <div class='time col-8'>
-            <button class='btn-dark secondary fiveMin'>5 Minute</button>
-            <button class='btn-dark secondary fourHour'>4 Hours</button>
-            <button class='btn-dark secondary day'>1 Day</button>
+    <div class='row ml-3' id='space'>
+        <div class='time col-8 mb-2'>
+            <button class='btn-dark fiveMin'>5 Minute</button>
+            <button class='btn-dark fifteenMin'>15 Minute</button>
+            <button class='btn-dark thirtyMin'>30 Minute</button>
+            <button class='btn-dark twoHour'>2 Hours</button>
+            <button class='btn-dark fourHour'>4 Hours</button>
+            <button class='btn-dark day'>1 Day</button>
+            <button class='btn-dark plus ml-5'>+</button>
+            <button class='btn-dark reset'>Reset</button>
+            <button class='btn-dark minus'>-</button>
         </div>
     </div>
 
     <div class="row">
 
         <div id='chart' class="d-inline col-9">
-            <canvas id="myChart" class='d-inline'></canvas>
+            <canvas id="myChart" class='d-inline mt-3'></canvas>
         </div>
         <div class="input-group d-inline col-3">
-                <div class="drop input-group-prepend d-inline col-3">
+                <div class="drop input-group-prepend d-inline col-3 mr-3">
                     <select id="pairs">
                         <option value="___"></option>
                         <option value="BTC">Bitcoin</option>
@@ -98,12 +103,12 @@
                     </select>
                     <!-- <span class="input-group-text">Left addon</span> -->
                 </div>
-                <input id="amount" type="text" class="amount d-inline" placeholder="amount">
+                <input id="amount" type="text" class="amount d-inline mr-4" placeholder=" Amount">
                 <div class="input-group-append d-inline">
                     <button id="addPair" class='btn-dark'>Add</button>
                 </div>
     
-                <ul id="simulations" class="list-group">
+                <ul id="simulations" class="list-group mr-3">
     
     
                 </ul>
@@ -159,7 +164,7 @@
         </div>
     </div>
 
-    </div>
+    <!-- </div> -->
     <script src="main.js"></script>
     <script type="text/javascript" src="img/polo.js"></script>
     <script type="text/javascript" src="img/chart.js"></script>

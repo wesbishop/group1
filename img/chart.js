@@ -26,7 +26,7 @@ class drawChart extends poloUrl{
         datasets: [{
             label: this.pair,
             backgroundColor: 'rgb(0, 0, 0)',
-            borderColor: 'rgb(255, 255, 0)',
+            borderColor: 'rgb(255, 255, 255)',
             data: this.close,
             fill: false,
             pointRadius: .1,
@@ -38,6 +38,23 @@ class drawChart extends poloUrl{
     options: {responsive:true, 
         chartArea: {
         backgroundColor: 'rgba(0, 0, 0, .7)'
+        },
+        legend: {
+            labels: {
+                fontColor: 'rgb(255, 255, 255)',
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'rgb(255, 255, 255)',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'rgb(255, 255, 255)',
+                }
+            }]
         }
     }
 });

@@ -9,6 +9,7 @@ body {
     color: blue;
 }
 
+
 #addPair {
     height: 2rem;
     width: 3.3rem;
@@ -37,17 +38,50 @@ body {
     border-radius: .4rem;
 }
 
+.btn-dark:hover {
+    cursor:  pointer;
+    color: crimson;
+}
+
+#myChart {
+    border-radius: .4rem;
+}
+
+#myChart:hover {
+    cursor: crosshair;
+}
+
+.list-group-item:hover {
+    cursor: pointer;
+    background-color: crimson;
+}
+
+#amount {
+    border-radius: .4rem;
+    border: none;
+    outline: none;
+    height: 2rem;
+    width: 5rem;
+    font-size: 1.2rem;
+}
+
+#pairs {
+    border-radius: .4rem;
+    border: none;
+    outline: none;
+    height: 2rem;
+    width: 6.5rem;
+    font-size: 1.2rem;
+}
+
+#chart {
+    border-radius: .4rem;
+}
+
 .fundrow {
     border: 1px solid black;
     margin-top: 5em;
 }
-
-.chart {
-    width: 100%;
-    background-color: black;
-
-}
-
 .card-group .card-img-top {
     height: 50px;
 }

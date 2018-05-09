@@ -1,31 +1,83 @@
-#userInitial {
-  background-color: blue;
-  color: white;
-  font-size: 2em;
-  font-weight: bold;
-  border: 2px solid black;
-  border-radius:50%;
-
+html,
+body {
+    height: 100%;
 }
 
-h1 {
-  text-align: center;
-  font-size: 125px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgb(0, 60, 255);
-  font-weight: 700;
+.navbar-brand {
+    font-style: italic;
+    font-weight: bolder;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-h2 {
-  text-align: center;
-  font-size: 50px;
-  font-weight: 600;
-  padding-top: 0.3em;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.stage {
+    background: url('cryptopulse.jpeg') center center no-repeat;
+    background-size: cover;
+    color: navy;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    opacity: 0.9;
+    padding-top: 6em;
 }
 
-h6 {
-  text-align: center;
-  font-weight: 400;
-  padding-bottom: 1em;
+.subStage {
+    color: white;
+    text-align: center;
+    margin-top: 6rem;
+    margin-left: 2rem;
+}
+
+.subStage input[type='submit'] {
+    height: 3rem;
+    width: 5rem;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: 1.1rem;
+    background: lightgrey;
+}
+
+.subStage input[type='submit']:hover {
+    cursor:  pointer;
+    background: white;
+    color: gray;
+}
+
+#signUp {
+    margin-top: 10%;
+    margin-right: 25%;
+}
+
+#forgot a:link{
+    text-decoration: none;
+    color: #000;
+}
+
+#forgot a:hover{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+#forgot a:visited{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+#login input[id="btnLogin"]:hover {
+    cursor:  pointer;
+    background: crimson;
+}
+
+.overlay2 {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    z-index: 0;
+}
+
+#computer {
+    width: 85%;
+    height: auto;
 }
