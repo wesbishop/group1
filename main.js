@@ -171,8 +171,7 @@ $(function() {
     console.log("Logged in");
     var init = async function() { // async function expression assigned to a variable
       await appUser.init(firebaseUser);
-      console.log("finished init");
-      console.log(appUser.currencies);
+      renderCards(appUser.currencies);
       renderPortfolio();
       return ;
     }();
