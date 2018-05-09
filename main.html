@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Main Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" type = "text/css" href="main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
 
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <!-- <script src="portfolio.js"></script> -->
 
@@ -22,141 +26,144 @@
 
 
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">CryptScoop</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CryptoPulse</a>
         <form class="form-inline my-2 my-lg-0">
-            
-            
+
+
         </form>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-              
+
         <div class="collapse navbar-collapse flex-row justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index2.html#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                         Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a id = "menuItemLogin" href="#loginModal" class="dropdown-item" data-toggle="modal">Login</a>
-                        <a href="#" id = "menuItemLogout" class="nav-link">Log out</a>
- 
-                        <a id="menuItemLoadData" class="dropdown-item" href="#">Load Data</a>
-                        <a id="menuItemSaveData" class="dropdown-item" href="#">Save Data</a>
-
-                        <a id="menuItemAppUserData" class="dropdown-item" href="#">Data - AppUser</a>
-                        <a id="menuItemFirebaseData" class="dropdown-item" href="#">Firestore cloud</a>
-
+                        <a id="menuItemLogin" href="#loginModal" class="dropdown-item" data-toggle="modal">Login</a>
+                        <a href="#" id="menuItemLogout" class="dropdown-item">Log Out</a>
                     </div>
                 </li>
-                <span id= "userInitial">
+                <span id="userInitial" >
                     A
-                  </span>
-                 
+                </span>
+
             </ul>
         </div>
     </nav>
 
-    <div class="container">
 
-            <div class="row">
-                    <div id='chart' class="d-inline col-9">
-                        <canvas id="myChart" class='d-inline'></canvas>
-                    </div>
+    <div class='row ml-3' id='space'>
+        <div class='time col-8'>
+            <button class='btn-dark secondary fiveMin'>5 Minute</button>
+            <button class='btn-dark secondary fourHour'>4 Hours</button>
+            <button class='btn-dark secondary day'>1 Day</button>
+        </div>
+    </div>
 
-                <div class="input-group d-inline col-3">
-                    <div class="input-group-prepend col-3">
-                        <select id = "pairs">
-                            <option value="___"></option>
-                            <option value="BTC">Bitcoin</option>
-                            <option value="BCH">Bitcoin Cash</option>
-                            <option value="ETH">Ethereum</option>
-                            <option value="XRP">Ripple</option>
-                            <option value="LTC">Litecoin</option>
-                            <option value="ETC">Ethereum Classic</option>
-                            <option value="STR">Stellar</option>
-                            <option value="NXT">NXT</option>
-                            <option value="ZEC">Zcash</option>
-                            <option value="XMR">Monero</option>
-                            <option value="DASH">Dash</option>
-                            <option value="REP">Augur</option>
-                          </select>
-                        <!-- <span class="input-group-text">Left addon</span> -->
-                    </div>
-                    <input id="amount" type="text" class="form-control" 
-                    style="text-align:right;" placeholder="amount">
-                    <div class="input-group-append">
-                        <button id="addPair">Add Simulation</button>
-                 </div>
+    <div class="row">
 
-                <ul id = "simulations" class="list-group">
-                
-
-                </ul>
-
-             </div>
-
-            </div>
-            <div class='row'>
-                <div class= 'col-8'>
-                <button class='secondary fiveMin'>5 Minute</button><button class='secondary fourHour'>4 Hours</button><button class='secondary day'>1 Day</button>
+        <div id='chart' class="d-inline col-9">
+            <canvas id="myChart" class='d-inline'></canvas>
+        </div>
+        <div class="input-group d-inline col-3">
+                <div class="drop input-group-prepend d-inline col-3">
+                    <select id="pairs">
+                        <option value="___"></option>
+                        <option value="BTC">Bitcoin</option>
+                        <option value="BCH">BCH</option>
+                        <option value="ETH">Ethereum</option>
+                        <option value="XRP">Ripple</option>
+                        <option value="LTC">Litecoin</option>
+                        <option value="ETC">ETC</option>
+                        <option value="STR">Stellar</option>
+                        <option value="NXT">NXT</option>
+                        <option value="ZEC">Zcash</option>
+                        <option value="XMR">Monero</option>
+                        <option value="DASH">Dash</option>
+                        <option value="REP">Augur</option>
+                    </select>
+                    <!-- <span class="input-group-text">Left addon</span> -->
                 </div>
-            </div>
+                <input id="amount" type="text" class="amount d-inline" placeholder="amount">
+                <div class="input-group-append d-inline">
+                    <button id="addPair" class='btn-dark'>Add</button>
+                </div>
+    
+                <ul id="simulations" class="list-group mr-3">
+    
+    
+                </ul>
+    </div>
+    <div class="row">
+        
+        </div>
+
     </div>
 
 
 
-  <!-- Login form - MODAL -->
-  <div class="modal fade text-dark " id="loginModal">
-    <div class="modal-dialog">
-      <div class="modal-content bg-secondary">
-        <div class="modal-header d-flex flex-row">
-          <img src="./img/logo.png">
-          <button class="close" data-dismiss="modal"><span>&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div>
-              <h1 class="text-white text-center">Member Login</h1>
-              <h4 id = "loginMessage" class="text-white text-center"></h4>
-            </div>
+    <!-- Login form - MODAL -->
+    <div class="modal fade text-dark " id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header d-flex flex-row">
+                    <img src="./img/logo.png">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div>
+                            <h1 class="text-white text-center">Member Login</h1>
+                            <h4 id="loginMessage" class="text-white text-center"></h4>
+                        </div>
 
-            <div class="form-group">
-              <i class="fa fa-email "></i>
-              <label for="txtEmail" class="text-white">Email</label>
-              <input type="text" id="txtEmail" class="form-control">
-            </div>
-            <div class="form-group">
-              <i class="fa fa-lock display-inline"></i>
-              <label for="txtPassword" class="text-white">Password</label>
-              <input type="password" id="txtPassword" class="form-control">
-            </div>
-          </form>
-        </div>
-        <div class="">
-          <button id = "btnLogin" class="btn btn-action btn-block">Login</button>
-        </div>
-        <div class="mt-2">
-          <button id = "btnSignUp" class="btn btn-action btn-block">Sign Up</button>
-        </div>
-        <!-- <div class="mt-2">
+                        <div class="form-group">
+                            <i class="fa fa-email "></i>
+                            <label for="txtEmail" class="text-white">Email</label>
+                            <input type="text" id="txtEmail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-lock display-inline"></i>
+                            <label for="txtPassword" class="text-white">Password</label>
+                            <input type="password" id="txtPassword" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="">
+                    <button id="btnLogin" class="btn btn-action btn-block">Login</button>
+                </div>
+                <div class="mt-2">
+                    <button id="btnSignUp" class="btn btn-action btn-block">Sign Up</button>
+                </div>
+                <!-- <div class="mt-2">
           <button id = "btnLogout" class="btn btn-action btn-block">Logout </button>
         </div> -->
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 
     <!-- </div> -->
     <script src="main.js"></script>
-<script type="text/javascript" src="img/polo.js"></script>
-<script type="text/javascript" src="img/chart.js"></script>
-<script type="text/javascript" src="img/script.js"></script>
+    <script type="text/javascript" src="img/polo.js"></script>
+    <script type="text/javascript" src="img/chart.js"></script>
+    <script type="text/javascript" src="img/script.js"></script>
 </body>
+
 </html>
