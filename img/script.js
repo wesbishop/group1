@@ -3,8 +3,11 @@ let curPair = $('#makePair').attr('value');
 let curTime = Number($('#makePair').attr('time'));
 let curRepeat = Number($('#makePair').attr('repeat'));
 
+
 var newBTCUrl = new drawChart(curPair ,curTime);
+$('#makePair').attr('color', newBTCUrl.colorPick());
 newBTCUrl.objectMaker();
+
 
 
 var timeSeries = function(){
@@ -16,68 +19,77 @@ var timeSeries = function(){
 }
 
     $('.fiveMin').on('click', function(){
-        var newSmall = new drawChart(timeSeries(),300, curRepeat);
-        newSmall.objectMaker()
-        $('#makePair').attr('time', 300)
+        let curColor = $('#makePair').attr('color');
+        var newSmall = new drawChart(timeSeries(),300, curRepeat, curColor);
+        newSmall.objectMaker();
+        $('#makePair').attr('time', 300);
     })
 
     $('.fifteenMin').on('click', function(){
-        var newFift = new drawChart(timeSeries(),900, curRepeat);
+      let curColor = $('#makePair').attr('color');
+        var newFift = new drawChart(timeSeries(),900, curRepeat, curColor);
         newFift.objectMaker()
         $('#makePair').attr('time', 900)
     })
 
     $('.thirtyMin').on('click', function(){
-        var newThirt = new drawChart(timeSeries(),1800,curRepeat);
+      let curColor = $('#makePair').attr('color');
+        var newThirt = new drawChart(timeSeries(),1800,curRepeat, curColor);
         newThirt.objectMaker()
         $('#makePair').attr('time', 1800)
     })
 
     $('.twoHour').on('click', function(){
-        var twoHour = new drawChart(timeSeries(),7200,curRepeat);
+      let curColor = $('#makePair').attr('color');
+        var twoHour = new drawChart(timeSeries(),7200,curRepeat, curColor);
         twoHour.objectMaker()
         $('#makePair').attr('time', 7200)
     })
 
     $('.fourHour').on('click', function(){
-        var newMed = new drawChart(timeSeries(),14400,curRepeat);
+      let curColor = $('#makePair').attr('color');
+        var newMed = new drawChart(timeSeries(),14400,curRepeat, curColor);
         newMed.objectMaker()
         $('#makePair').attr('time', 14400)
     })
 
     $('.day').on('click', function(){
-        var newDay = new drawChart(timeSeries(),86400,curRepeat);
+      let curColor = $('#makePair').attr('color');
+        var newDay = new drawChart(timeSeries(),86400,curRepeat, curColor);
         newDay.objectMaker();
         $('#makePair').attr('time', 86400)
     })
 
      $('.plus').on('click', function(){
+       let curColor = $('#makePair').attr('color');
         curTime = Number($('#makePair').attr('time'));
         curRepeat = Number($('#makePair').attr('repeat'));
         if(curRepeat > 100){
-        var newPlus = new drawChart(timeSeries(),curTime,(curRepeat-100));
+        var newPlus = new drawChart(timeSeries(),curTime,(curRepeat-100), curColor);
         $('#makePair').attr('repeat', curRepeat-100);
         newPlus.objectMaker();
         }else{
             alert(`Can't zoom in any further`)
         }
-        
+
     })
 
        $('.reset').on('click', function(){
+         let curColor = $('#makePair').attr('color');
         curTime = Number($('#makePair').attr('time'));
-        var newReset = new drawChart(timeSeries(),curTime);
+        var newReset = new drawChart(timeSeries(),curTime, curRepeat, curColor);
         newReset.objectMaker();
         $('#makePair').attr('repeat', 500);
-    
-        
+
+
     })
 
      $('.minus').on('click', function(){
+       let curColor = $('#makePair').attr('color');
         curTime = Number($('#makePair').attr('time'));
         curRepeat = Number($('#makePair').attr('repeat'));
         if(curRepeat < 1000){
-        var newMinus = new drawChart(timeSeries(),curTime,(curRepeat+100));
+        var newMinus = new drawChart(timeSeries(),curTime,(curRepeat+100), curColor);
         $('#makePair').attr('repeat', curRepeat+100);
         newMinus.objectMaker();
         }else{
