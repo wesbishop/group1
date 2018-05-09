@@ -20,6 +20,7 @@ $(function() {
       window.location.replace("./index.html");
   })
 
+
   btnLogin.addEventListener("click", e=> {
     const email = txtEmail.value;
     const password = txtPassword.value;

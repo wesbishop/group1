@@ -17,7 +17,14 @@ class User {
     };
  
     this.currencies = [];
-    this.activity = [];
+    this.activity = [{pair: "BTC", userCount: 4},{pair: "BCH", userCount: 2},
+                     {pair: "ETC", userCount: 4},{pair: "XRP", userCount: 2},
+                     {pair: "LTC", userCount: 1},{pair: "ETC", userCount: 0},
+                     {pair: "STR", userCount: 1},{pair: "NXT", userCount: 5},
+                     {pair: "ZEC", userCount: 0},{pair: "XMR", userCount: 4},
+                     {pair: "DASH", userCount: 1},{pair: "REP", userCount: 3},
+                    ];
+
 }  //constructor
   
  
@@ -103,27 +110,6 @@ class User {
     firestore.settings(this.firestoreConfig);
     let user = this.email || "no user";
     let currenciesCollection =  `portfolio/${user}/currencies`;
-    let userCurrencies = firestore.collection(currenciesCollection);
-    await userCurrencies.get().then(function(querySnapshot) {
-      if (!querySnapshot.empty) {
-        querySnapshot.docs.forEach(doc => {
-          this.currencies.push(doc.data());
-        //  console.log("docdata:",doc.data());
-        })
-      } else {
-        // console.log('no documents found');
-      }
-    }.bind(this));
-
-  }
-
-  async loadActivity() {
-
-    this.activity = [];
-    const firestore  = firebase.firestore();
-    firestore.settings(this.firestoreConfig);
-    let user = this.email || "no user";
-    let usersCollection =  `portfolio/${user}/currencies`;
     let userCurrencies = firestore.collection(currenciesCollection);
     await userCurrencies.get().then(function(querySnapshot) {
       if (!querySnapshot.empty) {
