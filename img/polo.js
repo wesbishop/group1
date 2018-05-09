@@ -9,7 +9,7 @@ class poloUrl {
         this.end = Math.round((new Date()).getTime() / 1000);
         this.period = period;
         this.start = this.end - (this.period * this.periodRepeat);
-        this.colorStart = this.end - (this.period * 2);
+        this.colorStart = this.end - (86400* 2);
         this.url = `https://poloniex.com/public?command=returnChartData&currencyPair=USDT_${pair}&start=${this.start}&end=${this.end}&period=${this.period}`;
         this.colorUrl = `https://poloniex.com/public?command=returnChartData&currencyPair=USDT_${pair}&start=${this.colorStart}&end=${this.end}&period=86400`;
     }
@@ -21,13 +21,15 @@ class poloUrl {
         var date = a.getDate();
         var hour = a.getHours();
         var min = a.getMinutes();
-        // var sec = a.getSeconds();
-        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min; //+ ':' + sec;
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
         return time;
     }
 
     objectMaker() {
+      this.colorPick();
         $.get(this.url).then((data) => {
+
             for (var i = 0; i < data.length; i++) {
                 this.close.push(data[i]['close']);
                 this.date.push(this.timeConverter(data[i]['date']));
