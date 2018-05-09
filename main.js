@@ -99,6 +99,7 @@ $(function() {
     document.getElementById("pairs").value = "___";
 
     renderPortfolio();
+    renderCards(appUser.currencies);
 
   })
 
@@ -114,6 +115,8 @@ $(function() {
     if (e.target.classList.contains("delete-pair")) {
       appUser.deletePair(pair);
       renderPortfolio();
+      renderCards(appUser.currencies);
+
     } else {
       //Display chart
       let curTime = Number($('#makePair').attr('time'));
@@ -171,8 +174,8 @@ $(function() {
     console.log("Logged in");
     var init = async function() { // async function expression assigned to a variable
       await appUser.init(firebaseUser);
-      renderCards(appUser.currencies);
       renderPortfolio();
+      renderCards(appUser.currencies);
       return ;
     }();
 
@@ -187,3 +190,4 @@ $(function() {
   });
 
 });
+
