@@ -117,13 +117,14 @@ $(function() {
     } else {
       //Display chart
       let curTime = Number($('#makePair').attr('time'));
+      let curRepeat = Number($('#makePair').attr('repeat'));
       $('#makePair').remove();
-      $('body').append(`<a id='makePair' value =${pair} time=${curTime}>`);
+      $('body').append(`<a id='makePair' value =${pair} time=${curTime} repeat=${curRepeat}>`);
       let curPair = $('#makePair').attr('value');
        $('#myChart').remove();
        $('iframe').remove();
       $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
-      var newUrl = new drawChart(pair,curTime);
+      var newUrl = new drawChart(pair,curTime, curRepeat);
       newUrl.objectMaker();
       // alert("display chart");
     }
