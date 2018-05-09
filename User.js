@@ -17,7 +17,7 @@ class User {
     };
  
     this.currencies = [];
-
+    this.activity = [];
 }  //constructor
   
  
@@ -115,6 +115,26 @@ class User {
       }
     }.bind(this));
 
+  }
+
+  async loadActivity() {
+
+    this.activity = [];
+    const firestore  = firebase.firestore();
+    firestore.settings(this.firestoreConfig);
+    let user = this.email || "no user";
+    let usersCollection =  `portfolio/${user}/currencies`;
+    let userCurrencies = firestore.collection(currenciesCollection);
+    await userCurrencies.get().then(function(querySnapshot) {
+      if (!querySnapshot.empty) {
+        querySnapshot.docs.forEach(doc => {
+          this.currencies.push(doc.data());
+        //  console.log("docdata:",doc.data());
+        })
+      } else {
+        // console.log('no documents found');
+      }
+    }.bind(this));
 
   }
 
