@@ -128,7 +128,6 @@ $(function() {
        $('iframe').remove();
       $('#chart').append('<canvas id="myChart" class="d-inline"></canvas>');
       var newUrl = new drawChart(pair,curTime, curRepeat);
-      newUrl.colorPick();
       newUrl.objectMaker();
       // alert("display chart");
     }
@@ -147,7 +146,7 @@ $(function() {
 
   appUser.currencies.forEach(element => {
     let amount = parseInt(element.amount).toLocaleString();
-    htmlListItem =  `<li class="list-group-item bg-dark text-light list-group-item-action px-0 mr-1" data-id="${element.pair}">
+    htmlListItem =  `<li class="list-group-item bg-dark text-light list-group-item-action px-0 col-10 mr-1" data-id="${element.pair}">
                        <div class="d-flex justify-content-start" data-id="${element.pair}">
                          <div data-id="${element.pair}" class="col-6">${element.pair}-${element.description}</div>
                          <div data-id="${element.pair}" class="text-right col-3">${amount}</div>
