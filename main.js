@@ -16,7 +16,8 @@ $(function() {
 
 
   menuItemLogout.addEventListener("click", e=> {
-      firebase.auth().signOut();
+
+    firebase.auth().signOut();
       window.location.replace("./index.html");
   })
 
