@@ -27,19 +27,7 @@ class poloUrl {
     }
 
     objectMaker() {
-      this.colorPick();
-        $.get(this.url).then((data) => {
-
-            for (var i = 0; i < data.length; i++) {
-                this.close.push(data[i]['close']);
-                this.date.push(this.timeConverter(data[i]['date']));
-            }
-            this.renderChart();
-        })
-    }
-
-    colorPick() {
-        $.get(this.colorUrl).then((data)=>{
+      $.get(this.colorUrl).then((data)=>{
               for (var i = 0; i < data.length; i++) {
               this.closeColor.push(data[i]['close']);
           }
@@ -52,6 +40,15 @@ class poloUrl {
             $('#makePair').attr('color', 'red');
             return('red')
           }
+        }).then(()=>{
+        $.get(this.url).then((data) => {
+
+            for (var i = 0; i < data.length; i++) {
+                this.close.push(data[i]['close']);
+                this.date.push(this.timeConverter(data[i]['date']));
+            }
+            this.renderChart();
+        })
         })
     }
 
