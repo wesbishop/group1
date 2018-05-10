@@ -29,7 +29,7 @@ class drawChart extends poloUrl{
             borderColor: this.color,
             data: this.close,
             fill: false,
-            pointRadius: .1,
+            pointRadius: 1,
         }],
 
     },
